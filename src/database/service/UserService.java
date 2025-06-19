@@ -26,7 +26,7 @@ public class UserService {
             return false; // User already exists
         }
         else{
-            User user = new User(email ,username, hashPass);
+            User user = new User(username ,email, hashPass);
             try {
                 userDAO.addUser(user);
             } catch (SQLException e) {
