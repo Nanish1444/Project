@@ -9,6 +9,9 @@ public class Connection_DB {
 
     static Connection instance = null;
 
+    private Connection_DB() {
+    }
+
     public static Connection getInstanceDB() {
         if(instance == null){
             try{
