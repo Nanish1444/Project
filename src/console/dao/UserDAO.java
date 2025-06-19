@@ -1,10 +1,11 @@
-package database.dao;
-import database.model.User;
+package console.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.regex.Pattern;
+
+import console.model.User;
 public class UserDAO {
     private Connection connection = null;
 

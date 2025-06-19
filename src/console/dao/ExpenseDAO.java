@@ -1,9 +1,10 @@
-package database.dao;
+package console.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import database.model.Expense;
+
+import console.model.Expense;
 
 public class ExpenseDAO {
     private Connection connection;

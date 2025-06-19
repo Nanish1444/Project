@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.Scanner;
 // import java.util.Locale.Category;
 
-import database.Connection_DB;
-import database.dao.CategoryDAO;
-import database.model.Income;
-import database.service.IncomeService;
-import database.service.UserService;
-import database.model.TransactionType;
+import console.dao.CategoryDAO;
+import console.database.Connection_DB;
+import console.model.Income;
+import console.model.TransactionType;
+import console.service.IncomeService;
+import console.service.UserService;
 
 public class TrackerApp {
    

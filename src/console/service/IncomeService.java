@@ -1,9 +1,10 @@
-package database.service;
-import database.model.Income;
-import database.Connection_DB;
-import database.dao.IncomeDAO;
+package console.service;
 import java.sql.SQLException;
 import java.util.List;
+
+import console.dao.IncomeDAO;
+import console.database.Connection_DB;
+import console.model.Income;
 
 public class IncomeService {
     

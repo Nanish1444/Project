@@ -1,4 +1,4 @@
-package database.model;
+package console.model;
 public class User {
 
     private String userEmail;

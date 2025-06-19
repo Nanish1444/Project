@@ -1,4 +1,4 @@
-package database.dao;
+package console.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import database.model.Income;
+import console.model.Income;
 
 public class IncomeDAO {
     // add edit delete filter search show all

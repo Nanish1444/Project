@@ -1,4 +1,4 @@
-package database.passwordManager;
+package console.passwordManager;
 // import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class PasswordHasher {

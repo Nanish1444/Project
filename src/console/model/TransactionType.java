@@ -1,4 +1,4 @@
-package database.model;
+package console.model;
 
 public enum TransactionType {
     INCOME,

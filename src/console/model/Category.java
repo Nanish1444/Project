@@ -1,4 +1,4 @@
-package database.model;
+package console.model;
 // import database.model.TransactionType;
 
 public class Category {

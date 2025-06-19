@@ -1,12 +1,11 @@
-package database.service;
+package console.service;
 
 import java.sql.SQLException;
 
-import database.Connection_DB;
-
-import database.dao.UserDAO;
-import database.model.User;
-import database.passwordManager.PasswordHasher;
+import console.dao.UserDAO;
+import console.database.Connection_DB;
+import console.model.User;
+import console.passwordManager.PasswordHasher;
 
 
 public class UserService {

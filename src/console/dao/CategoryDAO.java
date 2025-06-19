@@ -1,13 +1,14 @@
-package database.dao;
-import database.model.Expense;
-import database.model.Income;
-import database.model.TransactionType;
+package console.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import console.model.Expense;
+import console.model.Income;
+import console.model.TransactionType;
 
 public class CategoryDAO {
     
