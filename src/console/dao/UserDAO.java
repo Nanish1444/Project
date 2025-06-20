@@ -19,8 +19,9 @@ public class UserDAO {
         //Mail check condition to check the mail is valid or not.
         
         Pattern pattern = Pattern.compile(regex);
+        System.out.println("EMAIL : "+user.getUserEmail());
         System.out.println("Match : "+pattern.matcher(user.getUserEmail()).matches());
-        if(!pattern.matcher(user.getUserEmail()).matches()) {
+        if(!pattern.matcher(user.getUserEmail().trim()).matches()) {
 
             throw new IllegalArgumentException("Invalid email check again");
         }
@@ -85,10 +86,10 @@ public class UserDAO {
         // prest.executeQuery().next();
         ResultSet rs = prest.executeQuery();
         
-        // rs.next();
-        boolean res =rs.next();
-
-        System.out.println("Email exists: " + res);
+        boolean res = false;
+        if (rs.next()) {
+            res = rs.getInt(1) > 0;
+        }
         return res;
     }
     public String getPassword(String userEmail) throws SQLException {

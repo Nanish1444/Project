@@ -6,9 +6,9 @@ public class Expense {
     private int expenseId;
     private String expenseDescription;
     private double expenseAmount;
-    private LocalDate expenseDate;
+    private String expenseDate;
 
-    public Expense(String expenseDescription, double expenseAmount, LocalDate expenseDate) {
+    public Expense(String expenseDescription, double expenseAmount, String expenseDate) {
         this.expenseDescription = expenseDescription;
         this.expenseAmount = expenseAmount;
         this.expenseDate = expenseDate;
@@ -33,12 +33,12 @@ public class Expense {
         this.expenseAmount = expenseAmount;
     }
 
-    public LocalDate getExpenseDate() {
+    public String getExpenseDate() {
         return expenseDate;
     }
 
     public void setExpenseDate(LocalDate expenseDate) {
-        this.expenseDate = expenseDate;
+        this.expenseDate = expenseDate.toString();
     }
 
     public int getExpenseId() {

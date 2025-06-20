@@ -13,6 +13,7 @@ import console.model.TransactionType;
 public class CategoryDAO {
     
     private Connection connection;
+    
     public CategoryDAO(Connection connection) {
         // Constructor to initialize the connection
         this.connection = connection;
@@ -25,19 +26,7 @@ public class CategoryDAO {
         prest.setString(2, categoryType.toUpperCase());
         prest.executeUpdate();
     }
-    public List<String> showAllCategories(TransactionType type) throws SQLException {
-        List<String> categories = new ArrayList<>();
-        String sql = "SELECT name FROM categories where type = 'INCOME' OR type = 'EXPENSE'";
-         // Assuming categories table has a column 'type' to differentiate between income and expense categories
-        PreparedStatement prest = connection.prepareStatement(sql);
-        prest.setString(1, type.name());
-        ResultSet rs = prest.executeQuery();
-        while (rs.next()) {
-            categories.add(rs.getString("name"));
-        }
-        rs.close();
-        return categories;
-    }
+    
     public void editCategory(int categoryId, String categoryName, String categoryType) throws SQLException {
         String sql = "UPDATE categories SET name = ?, type = ? WHERE id = ?";
         PreparedStatement prest = connection.prepareStatement(sql);
@@ -86,6 +75,19 @@ public class CategoryDAO {
             System.out.println("No category found with the name: " + category);
         }
         return incomes;
+    }
+    public List<String> showAllCategories(TransactionType type) throws SQLException {
+        List<String> categories = new ArrayList<>();
+        String sql = "SELECT name FROM categories where type = ? ";
+         // Assuming categories table has a column 'type' to differentiate between income and expense categories
+        PreparedStatement prest = connection.prepareStatement(sql);
+        prest.setString(1, type.name());
+        ResultSet rs = prest.executeQuery();
+        while (rs.next()) {
+            categories.add(rs.getString("name"));
+        }
+        rs.close();
+        return categories;
     }
 
     public List<Expense> showSelectedExpenses(String category) throws SQLException {

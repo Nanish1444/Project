@@ -25,7 +25,7 @@ public class UserService {
             return false; // User already exists
         }
         else{
-            User user = new User(username ,email, hashPass);
+            User user = new User(email ,username, hashPass);
             try {
                 userDAO.addUser(user);
             } catch (SQLException e) {
@@ -38,11 +38,11 @@ public class UserService {
     }
 
     public boolean login(String userMail, String password) {
-        String hashPass=PasswordHasher.hashPassword(password);
         try {
             if(userDAO.emailExists(userMail)){
-                if(PasswordHasher.verifyPassword(hashPass, userDAO.getPassword(userMail))){
+                if(PasswordHasher.verifyPassword(password, userDAO.getPassword(userMail))){
                     System.out.println("Login successful!");
+                    return true;
                 } else {
                     System.out.println("Invalid password. Please try again.");
                     return false; // Login failed
@@ -55,7 +55,6 @@ public class UserService {
         } catch (SQLException e) {
             return false;
         }
-        return false;
     }
 
 

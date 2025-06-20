@@ -87,25 +87,25 @@ public class IncomeDAO {
         return incomes;
     }
     
-    public List<Income> showAllIncomes() throws SQLException {
-        List<Income> incomes = new ArrayList<>();
-        String sql = "SELECT * FROM income WHERE is_deleted = FALSE";
+    // public List<Income> showAllIncomes() throws SQLException {
+    //     List<Income> incomes = new ArrayList<>();
+    //     String sql = "SELECT * FROM income WHERE is_deleted = FALSE";
         
-        PreparedStatement prest = connection.prepareStatement(sql);
-        ResultSet rs = prest.executeQuery();
+    //     PreparedStatement prest = connection.prepareStatement(sql);
+    //     ResultSet rs = prest.executeQuery();
 
-        while(rs.next()){
-            Income income = new Income();
-            income.setIncomeId(rs.getInt("id"));
-            income.setIncomeDescription(rs.getString("description"));
-            income.setIncomeAmount(rs.getDouble("amount"));
-            income.setIncomeDate(rs.getDate("date").toLocalDate());
-            // Add the income to a list or process it as needed
-            incomes.add(income);
-        }
-        System.out.println("All incomes shown successfully");
-        return incomes;
-    }
+    //     while(rs.next()){
+    //         Income income = new Income();
+    //         income.setIncomeId(rs.getInt("id"));
+    //         income.setIncomeDescription(rs.getString("description"));
+    //         income.setIncomeAmount(rs.getDouble("amount"));
+    //         income.setIncomeDate(rs.getDate("date").toLocalDate());
+    //         // Add the income to a list or process it as needed
+    //         incomes.add(income);
+    //     }
+    //     System.out.println("All incomes shown successfully");
+    //     return incomes;
+    // }
 
     public Income getIncome(int incomeId) throws SQLException {
         String sql = "SELECT * FROM income WHERE id = ? AND is_deleted = FALSE";
@@ -139,7 +139,7 @@ public class IncomeDAO {
             incomes.add(income);
         }
 
-        return null;
+        return incomes;
     }
 
     public double getTotalIncome() {
