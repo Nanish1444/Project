@@ -12,6 +12,7 @@ import console.service.CategoryService;
 import console.service.ExpenseService;
 import console.service.IncomeService;
 import console.service.UserService;
+import console.model.Category;
 
 public class TrackerApp {
    
@@ -27,12 +28,13 @@ public class TrackerApp {
     public void start() throws SQLException {
         System.out.println("Welcome to Expense Tracker Application");
         System.out.println("Login or Signup to continue");
-        System.out.println("1. Login");
-        System.out.println("2. Signup");
-        System.out.println("3. Exit");
-        System.out.print("Enter your choice: ");
+       
         boolean run = true;
         while (run) {
+            System.out.println("1. Login");
+            System.out.println("2. Signup");
+            System.out.println("3. Exit");
+        System.out.print("Enter your choice: ");
             int choice = scan.nextInt();
             scan.nextLine(); // Consume newline character
 
@@ -144,7 +146,7 @@ public class TrackerApp {
                     System.out.println("Add the Date of Income (YYYY-MM-DD)");
                     String dateInput = scan.nextLine();
                     Income income = new Income(description, amount, dateInput);
-                    List<String> categories = categoryService.showAllCategories(TransactionType.INCOME);
+                    List<Category> categories = categoryService.showAllCategories(TransactionType.INCOME);
                     
 
                     for(int i=0;i<categories.size();i++){
@@ -153,8 +155,10 @@ public class TrackerApp {
                     System.out.println("Select the number of  Income Type :");
 
                     int selectedCategories = scan.nextInt();
+
+                    int actualId = categories.get(selectedCategories - 1).getId();
                     
-                    incomeService.addIncome(income,selectedCategories);
+                    incomeService.addIncome(income,actualId);
                     break;
                 case 2:
                     incomeService.getAllIncomes().forEach(incomeItem -> {
@@ -180,13 +184,13 @@ public class TrackerApp {
                     break;
                 case 5:
                     System.out.println("Select the category number in the list");
-                    List<String> availableCategories= categoryService.showAllCategories(TransactionType.INCOME);
+                    List<Category> availableCategories= categoryService.showAllCategories(TransactionType.INCOME);
 
                     for(int i=0;i<availableCategories.size();i++){
                         System.out.println((i+1)+" : "+availableCategories.get(i));
                     }
                     int selectedNumber = scan.nextInt();
-                    String category_selected = availableCategories.get(selectedNumber-1);
+                    String category_selected = availableCategories.get(selectedNumber-1).getCategoryName();
                     List<Income> listedIncome = categoryService.showSelectedIncomes(category_selected);
 
                     for(int i=0;i<listedIncome.size();i++){
@@ -239,10 +243,10 @@ public class TrackerApp {
                 case 9:
                     System.out.println("List of category type Available for incomes: ");
 
-                    List<String> listCategories= categoryService.showAllCategories(TransactionType.INCOME);
+                    List<Category> listCategories= categoryService.showAllCategories(TransactionType.INCOME);
 
                     for(int i=0;i<listCategories.size();i++){
-                        System.out.println((i+1)+" : "+listCategories.get(i));
+                        System.out.println((i+1)+" : "+listCategories.get(i).getCategoryName());
                     }
                     break;
                 case 10:
@@ -274,7 +278,7 @@ public class TrackerApp {
         while (run) {
             System.out.print("Enter your choice: ");
             int choice = scan.nextInt();
-            scan.nextLine();
+            scan.nextLine(); // Consume newline character
 
             switch (choice) {
                 case 1:
@@ -282,20 +286,24 @@ public class TrackerApp {
                     String description = scan.nextLine();
                     System.out.println("Add the Amount of Expense");
                     double amount = scan.nextDouble();
-                    scan.nextLine();
+                    scan.nextLine();  
                     System.out.println("Add the Date of Expense (YYYY-MM-DD)");
                     String dateInput = scan.nextLine();
                     Expense expense = new Expense(description, amount, dateInput);
-                    List<String> categories = categoryService.showAllCategories(TransactionType.EXPENSE);
+                    List<Category> categories = categoryService.showAllCategories(TransactionType.EXPENSE);
 
                     for (int i = 0; i < categories.size(); i++) {
-                        System.out.println((i + 1) + " - " + categories.get(i));
+                        System.out.println((i + 1) + " - " + categories.get(i).getCategoryName());
                     }
                     System.out.println("Select the number of Expense Type :");
 
+
                     int selectedCategories = scan.nextInt();
 
-                    expenseService.addExpense(expense, selectedCategories);
+                    int actualId = categories.get(selectedCategories - 1).getId();
+                    System.out.println("ACTUAL id of epense id : "+actualId);
+                    expenseService.addExpense(expense, actualId);
+                    System.out.println("Expense added successfully!");
                     break;
                 case 2:
                     expenseService.getAllExpenses().forEach(expenseItem -> {
@@ -321,13 +329,13 @@ public class TrackerApp {
                     break;
                 case 5:
                     System.out.println("Select the category number in the list");
-                    List<String> availableCategories = categoryService.showAllCategories(TransactionType.EXPENSE);
+                    List<Category> availableCategories = categoryService.showAllCategories(TransactionType.EXPENSE);
 
                     for (int i = 0; i < availableCategories.size(); i++) {
                         System.out.println((i + 1) + " : " + availableCategories.get(i));
                     }
                     int selectedNumber = scan.nextInt();
-                    String category_selected = availableCategories.get(selectedNumber - 1);
+                    String category_selected = availableCategories.get(selectedNumber - 1).getCategoryName();
                     List<Expense> listedExpense = categoryService.showSelectedExpense(category_selected);
 
                     for (int i = 0; i < listedExpense.size(); i++) {
@@ -362,9 +370,9 @@ public class TrackerApp {
                         }
 
                         expenseService.editExpense(existingExpense);
-                    } else {
-                        System.out.println("No expense found with ID: " + expenseId);
-                    }
+                        } else {
+                            System.out.println("No expense found with ID: " + expenseId);
+                        }
                     break;
                 case 7:
                     System.out.println("Enter the ID of the expense to temporarily delete: ");
@@ -381,10 +389,10 @@ public class TrackerApp {
                 case 9:
                     System.out.println("List of category type Available for expenses: ");
 
-                    List<String> listCategories = categoryService.showAllCategories(TransactionType.EXPENSE);
+                    List<Category> listCategories = categoryService.showAllCategories(TransactionType.EXPENSE);
 
                     for (int i = 0; i < listCategories.size(); i++) {
-                        System.out.println((i + 1) + " : " + listCategories.get(i));
+                        System.out.println((i + 1) + " : " + listCategories.get(i).getCategoryName());
                     }
                     break;
                 case 10:

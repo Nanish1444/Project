@@ -5,6 +5,7 @@ import java.util.List;
 
 import console.dao.CategoryDAO;
 import console.database.Connection_DB;
+import console.model.Category;
 import console.model.Expense;
 import console.model.Income;
 import console.model.TransactionType;
@@ -30,7 +31,7 @@ public class CategoryService {
     public List<Expense> showSelectedExpense(String categoryName) throws SQLException{
         return this.categoriesDAO.showSelectedExpenses(categoryName);
     }
-    public List<String> showAllCategories(TransactionType type) throws SQLException{
+    public List<Category> showAllCategories(TransactionType type) throws SQLException{
         return this.categoriesDAO.showAllCategories(type);
     }
 

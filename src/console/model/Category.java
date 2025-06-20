@@ -2,8 +2,15 @@ package console.model;
 // import database.model.TransactionType;
 
 public class Category {
+    private int id;
+    
     private String categoryName;
     private TransactionType categoryType;
+
+    public Category(int id, String categoryName) {
+        this.id = id;
+        this.categoryName = categoryName;
+    }
 
     public Category(String categoryName, TransactionType categoryType) {
         this.categoryName = categoryName;
@@ -13,6 +20,12 @@ public class Category {
     public Category() {
     }
 
+    public int getId() {    
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }    
     public String getCategoryName() {
         return categoryName;
     }

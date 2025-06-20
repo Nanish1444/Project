@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import console.model.Category;
 import console.model.Expense;
 import console.model.Income;
 import console.model.TransactionType;
@@ -13,7 +14,7 @@ import console.model.TransactionType;
 public class CategoryDAO {
     
     private Connection connection;
-    
+
     public CategoryDAO(Connection connection) {
         // Constructor to initialize the connection
         this.connection = connection;
@@ -76,15 +77,19 @@ public class CategoryDAO {
         }
         return incomes;
     }
-    public List<String> showAllCategories(TransactionType type) throws SQLException {
-        List<String> categories = new ArrayList<>();
-        String sql = "SELECT name FROM categories where type = ? ";
+    public List<Category> showAllCategories(TransactionType type) throws SQLException {
+        List<Category> categories = new ArrayList<>();
+        String sql = "SELECT * FROM categories where type = ? ";
          // Assuming categories table has a column 'type' to differentiate between income and expense categories
         PreparedStatement prest = connection.prepareStatement(sql);
+        System.out.println("TYPE : _ > " + type.name());
         prest.setString(1, type.name());
         ResultSet rs = prest.executeQuery();
         while (rs.next()) {
-            categories.add(rs.getString("name"));
+            Category category = new Category();
+            category.setId(rs.getInt("id"));
+            category.setCategoryName(rs.getString("name"));
+            categories.add(category);
         }
         rs.close();
         return categories;
